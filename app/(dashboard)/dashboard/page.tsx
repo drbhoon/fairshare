@@ -22,6 +22,7 @@ export default function DashboardPage() {
   const [balances, setBalances] = useState<any[]>([])
   const [totalOwed, setTotalOwed] = useState(0)
   const [totalOwe, setTotalOwe] = useState(0)
+  const [currency, setCurrency] = useState('USD')
   const [recentExpenses, setRecentExpenses] = useState<any[]>([])
   const [groups, setGroups] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -45,6 +46,7 @@ export default function DashboardPage() {
       setBalances(balancesData.balances ?? [])
       setTotalOwed(balancesData.totalOwed ?? 0)
       setTotalOwe(balancesData.totalOwe ?? 0)
+      setCurrency(balancesData.currency ?? 'USD')
       setRecentExpenses(expensesData.expenses ?? [])
       setGroups(groupsData.groups ?? [])
     } catch (err) {
@@ -81,38 +83,38 @@ export default function DashboardPage() {
       </div>
 
       {/* Balance summary cards */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-8">
         <Card>
-          <CardContent className="pt-6">
-            <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">Total balance</p>
-            <p className={`text-2xl font-bold ${net >= 0 ? 'text-green-600' : 'text-red-500'}`}>
-              {net >= 0 ? '+' : ''}{formatCurrency(net)}
+          <CardContent className="p-3 sm:p-6">
+            <p className="text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">Total balance</p>
+            <p className={`text-base sm:text-2xl font-bold ${net >= 0 ? 'text-green-600' : 'text-red-500'}`}>
+              {net >= 0 ? '+' : ''}{formatCurrency(net, currency)}
             </p>
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-[10px] sm:text-xs text-gray-400 mt-0.5 sm:mt-1">
               {net >= 0 ? 'Overall you are owed' : 'Overall you owe'}
             </p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardContent className="pt-6">
+          <CardContent className="p-3 sm:p-6">
             <div className="flex items-center gap-1 mb-1">
               <TrendingUp className="w-3.5 h-3.5 text-green-500" />
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">You are owed</p>
+              <p className="text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-wide">You are owed</p>
             </div>
-            <p className="text-2xl font-bold text-green-600">{formatCurrency(totalOwed)}</p>
-            <p className="text-xs text-gray-400 mt-1">from {balances.filter(b => b.amount > 0).length} people</p>
+            <p className="text-base sm:text-2xl font-bold text-green-600">{formatCurrency(totalOwed, currency)}</p>
+            <p className="text-[10px] sm:text-xs text-gray-400 mt-0.5 sm:mt-1">from {balances.filter(b => b.amount > 0).length} people</p>
           </CardContent>
         </Card>
 
         <Card>
-          <CardContent className="pt-6">
+          <CardContent className="p-3 sm:p-6">
             <div className="flex items-center gap-1 mb-1">
               <TrendingDown className="w-3.5 h-3.5 text-red-500" />
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">You owe</p>
+              <p className="text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-wide">You owe</p>
             </div>
-            <p className="text-2xl font-bold text-red-500">{formatCurrency(totalOwe)}</p>
-            <p className="text-xs text-gray-400 mt-1">to {balances.filter(b => b.amount < 0).length} people</p>
+            <p className="text-base sm:text-2xl font-bold text-red-500">{formatCurrency(totalOwe, currency)}</p>
+            <p className="text-[10px] sm:text-xs text-gray-400 mt-0.5 sm:mt-1">to {balances.filter(b => b.amount < 0).length} people</p>
           </CardContent>
         </Card>
       </div>
@@ -169,7 +171,7 @@ export default function DashboardPage() {
                         balance.amount > 0 ? 'text-green-600' : 'text-red-500'
                       }`}
                     >
-                      {formatCurrency(Math.abs(balance.amount))}
+                      {formatCurrency(Math.abs(balance.amount), currency)}
                     </span>
                     {balance.amount < 0 && (
                       <Button

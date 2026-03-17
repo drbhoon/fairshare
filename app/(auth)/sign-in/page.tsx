@@ -57,7 +57,7 @@ export default function SignInPage() {
           <span className="text-2xl font-bold text-gray-900">FairShare</span>
         </div>
 
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-8">
           <h1 className="text-2xl font-bold text-gray-900 mb-1">Welcome back</h1>
           <p className="text-gray-500 text-sm mb-6">Sign in to your account</p>
 

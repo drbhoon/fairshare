@@ -85,5 +85,14 @@ export async function GET() {
     .filter((b) => b.amount < 0)
     .reduce((sum, b) => sum + Math.abs(b.amount), 0)
 
-  return NextResponse.json({ balances, totalOwed, totalOwe })
+  const currencyCount = new Map<string, number>()
+  for (const e of expenses) {
+    const c = e.currency ?? 'USD'
+    currencyCount.set(c, (currencyCount.get(c) ?? 0) + 1)
+  }
+  const currency = currencyCount.size > 0
+    ? Array.from(currencyCount.entries()).sort((a, b) => b[1] - a[1])[0][0]
+    : 'USD'
+
+  return NextResponse.json({ balances, totalOwed, totalOwe, currency })
 }

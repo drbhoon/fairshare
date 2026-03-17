@@ -127,13 +127,13 @@ export default function GroupDetailPage() {
           <div className="flex gap-2 flex-shrink-0">
             <a href={`/api/export/csv?groupId=${id}`}>
               <Button variant="outline" size="sm">
-                <Download className="w-4 h-4 mr-1" />
-                Export
+                <Download className="w-4 h-4 sm:mr-1" />
+                <span className="hidden sm:inline">Export</span>
               </Button>
             </a>
             <Button variant="teal" size="sm" onClick={() => setAddExpenseOpen(true)}>
-              <Plus className="w-4 h-4 mr-1" />
-              Expense
+              <Plus className="w-4 h-4 sm:mr-1" />
+              <span className="hidden sm:inline">Expense</span>
             </Button>
           </div>
         </div>

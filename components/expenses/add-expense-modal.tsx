@@ -158,14 +158,14 @@ export function AddExpenseModal({ open, onOpenChange, groupId, members, onSucces
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Add an expense</DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Description + Amount */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="col-span-2">
               <Label>Description</Label>
               <Input
@@ -205,7 +205,7 @@ export function AddExpenseModal({ open, onOpenChange, groupId, members, onSucces
           </div>
 
           {/* Paid by + Category + Date */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <Label>Paid by</Label>
               <Select value={paidById} onValueChange={setPaidById}>
@@ -243,7 +243,7 @@ export function AddExpenseModal({ open, onOpenChange, groupId, members, onSucces
           {/* Split type */}
           <div>
             <Label>Split type</Label>
-            <div className="grid grid-cols-4 gap-1 mt-1">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-1 mt-1">
               {(['EQUAL', 'EXACT', 'PERCENTAGE', 'SHARES'] as SplitType[]).map((type) => (
                 <button
                   key={type}
